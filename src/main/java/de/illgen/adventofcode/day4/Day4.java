@@ -13,10 +13,10 @@ public class Day4 {
 		List<String> lines = new ArrayList<>(Arrays.asList(data.split("\r?\n")));
 		List<DataAssignment> assignmentList = getAssignmentList(lines);
 		
-		int sectionsCovered = part1Improved(assignmentList);
+		int sectionsCovered = part1(assignmentList);
 		System.out.println(sectionsCovered);
 
-		int sectionsPartlyCovered = part2Improved(assignmentList);
+		int sectionsPartlyCovered = part2(assignmentList);
 		System.out.println(sectionsPartlyCovered);
 
 	}
@@ -35,7 +35,7 @@ public class Day4 {
 		
 	}
 	
-	private static int part1Improved(List<DataAssignment> assignmentList) {
+	private static int part1(List<DataAssignment> assignmentList) {
 		int amount = 0;
 		for (DataAssignment assignment : assignmentList) {
 			
@@ -47,7 +47,7 @@ public class Day4 {
 		return amount;
 	}
 	
-	private static int part2Improved(List<DataAssignment> assignmentList) {
+	private static int part2(List<DataAssignment> assignmentList) {
 		int amount = 0;
 		for (DataAssignment assignment : assignmentList) {
 			
@@ -56,62 +56,5 @@ public class Day4 {
 			}
 		}
 		return amount;
-	}
-
-	
-	
-	//
-	private static int part1(List<String> lines) {
-		int amount = 0;
-		for (String line : lines) {
-			String[] sections = line.split(",");
-			Integer[] seprateSections1 = writeSectionArray(sections, 0);
-			Integer[] seprateSections2 = writeSectionArray(sections, 1);
-			if (condition1(seprateSections1, seprateSections2)) {
-				amount++;
-			}
-		}
-		return amount;
-	}
-
-	private static int part2(List<String> lines) {
-		int amount = 0;
-		for (String line : lines) {
-			String[] sections = line.split(",");
-			Integer[] seprateSections1 = writeSectionArray(sections, 0);
-			Integer[] seprateSections2 = writeSectionArray(sections, 1);
-			if (condition2(seprateSections1, seprateSections2)) {
-				amount++;
-			}
-		}
-		return amount;
-	}
-
-	private static boolean condition1(Integer[] seprateSections1, Integer[] seprateSections2) {
-		if (Arrays.asList(seprateSections1).containsAll(Arrays.asList(seprateSections2))
-				|| Arrays.asList(seprateSections2).containsAll(Arrays.asList(seprateSections1))) {
-			return true;
-		}
-		return false;
-	}
-
-	private static boolean condition2(Integer[] seprateSections1, Integer[] seprateSections2) {
-		for (Integer sectionI : seprateSections2) {
-			if (Arrays.asList(seprateSections1).contains(sectionI)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private static Integer[] writeSectionArray(String[] sections, int index) {
-		String[] singleSection = sections[index].split("-");
-		int length = Integer.parseInt(singleSection[1]) - Integer.parseInt(singleSection[0]) + 1;
-		Integer[] seprateSections = new Integer[length];
-
-		for (int i = 0; i < seprateSections.length; i++) {
-			seprateSections[i] = Integer.parseInt(singleSection[0]) + i;
-		}
-		return seprateSections;
 	}
 }
